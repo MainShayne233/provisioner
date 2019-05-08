@@ -1,0 +1,43 @@
+---
+- hosts: all
+  vars:
+    apt_packages: [
+      'neovim',
+      'deepin-screenshot',
+      'zsh',
+      'tmux',
+      'xclip',
+      'git',
+      'inotify-tools',
+      'postgresql',
+      'postgresql-contrib',
+      'jq',
+      'tree'
+    ]
+    deb_packages: [
+      {
+        name: 'alacritty',
+        path: 'https://github.com/jwilm/alacritty/releases/download/v0.2.9/Alacritty-v0.2.9_amd64.deb'
+      },
+      {
+        name: 'slack-desktop',
+        path: 'https://downloads.slack-edge.com/linux_releases/slack-desktop-3.3.8-amd64.deb'
+      },
+      {
+        name: 'zoom',
+        path: 'https://zoom.us/client/latest/zoom_amd64.deb',
+      },
+      {
+        name: 'google-chrome-stable',
+        path: 'https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb'
+      }
+    ]
+  become: yes
+  become_user: root
+  become_method: sudo
+  tasks:
+  - name: Install apt packages
+    action: >
+      {{ ansible_pkg_mgr }} name={{ apt_packages }} state=present update_cache=yes
+  - include_tasks: "install-deb-package.yml"
+    with_items: "{{ deb_packages }}"

@@ -1,0 +1,10 @@
+---
+- name: Check if {{ item.name }} is already installed
+  command: dpkg-query -W {{ item.name }}
+  register: deb_package_check
+  failed_when: deb_package_check.rc > 1
+
+- name: Install {{ item.name }}
+  apt:
+    deb: "{{ item.path }}"
+  when: deb_package_check.rc == 1
