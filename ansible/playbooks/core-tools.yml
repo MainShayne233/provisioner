@@ -31,6 +31,10 @@
       {
         name: 'google-chrome-stable',
         path: 'https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb'
+      },
+      {
+        name: 'spotify',
+        path: 'http://repository.spotify.com/pool/non-free/s/spotify/spotify-client-0.9.17_0.9.17.8.gd06432d.31-1_amd64.deb'
       }
     ]
   become: yes
