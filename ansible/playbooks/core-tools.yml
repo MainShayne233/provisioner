@@ -12,7 +12,8 @@
       'postgresql',
       'postgresql-contrib',
       'jq',
-      'tree'
+      'tree',
+      'gparted'
     ]
     deb_packages: [
       {
