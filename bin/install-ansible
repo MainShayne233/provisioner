@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 main() {
+  echo "Installing ansible..."
   sudo apt update
   sudo apt install software-properties-common
   sudo apt-add-repository ppa:ansible/ansible

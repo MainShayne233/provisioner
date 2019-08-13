@@ -1,0 +1,14 @@
+---
+- hosts: all
+  become: yes
+  become_user: root
+  become_method: sudo
+  tasks:
+  - name: Download stack installer
+    get_url: url=https://get.haskellstack.org/ dest=/tmp/stack.sh
+
+  - name: Execute the stack installer
+    shell: chmod u+x /tmp/stack.sh && /tmp/stack.sh
+
+  - name: Remove the zsh-installer.sh
+    file: path=/tmp/stack.sh state=absent

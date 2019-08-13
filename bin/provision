@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+PROVISION_DIR="${0%/*}/.."
+
+install_own_deps() {
+    "$PROVISION_DIR/bin/install-ansible"
+}
+
+run_playbooks() {
+    (
+        cd "$PROVISION_DIR/ansible"
+        for playbook in "core-tools.yml" "webassembly.yml"
+        do
+            ansible-playbook -i "./hosts" "./playbooks/$playbook"
+        done
+    )
+}
+
+main() {
+    install_own_deps
+    run_playbooks
+}
+
+main "$@"

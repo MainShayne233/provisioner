@@ -1,0 +1,23 @@
+---
+- hosts: all
+  vars:
+    apt_packages: [
+      'cmake',
+      'clang'
+    ]
+  become: yes
+  become_user: root
+  become_method: sudo
+  tasks:
+  - name: Install apt dependencies for wabt
+    action: >
+      {{ ansible_pkg_mgr }} name={{ apt_packages }} state=present update_cache=yes
+  - name: Clone wabt repo
+    git: repo=https://github.com/WebAssembly/wabt
+         recursive=yes
+         dest=/tmp/wabt
+         force=yes
+  - name: Make install wabt
+    make:
+      chdir: /tmp/wabt
+      target: install
