@@ -13,7 +13,8 @@
       'postgresql-contrib',
       'jq',
       'tree',
-      'gparted'
+      'gparted',
+      'libssl-dev'
     ]
     deb_packages: [
       {

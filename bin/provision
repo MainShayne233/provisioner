@@ -9,7 +9,7 @@ install_own_deps() {
 run_playbooks() {
     (
         cd "$PROVISION_DIR/ansible"
-        for playbook in "core-tools.yml" "webassembly.yml"
+        for playbook in "core-tools.yml" "webassembly.yml" "emacs.yml"
         do
             ansible-playbook -i "./hosts" "./playbooks/$playbook"
         done

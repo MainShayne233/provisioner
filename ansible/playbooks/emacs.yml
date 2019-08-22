@@ -1,0 +1,28 @@
+---
+- hosts: all
+  vars:
+    apt_packages: [
+      'build-essential',
+    ]
+  become: yes
+  become_user: root
+  become_method: sudo
+  tasks:
+  - name: Install emacs
+    shell: |
+      if command -v emacs; then
+          echo "Emacs is already installed"
+      else
+          echo "Installing emacs"
+          mkdir "$HOME/opt"
+          cd "$HOME/opt"
+          sudo apt-get install build-essential
+          sudo apt-get build-dep emacs
+          git clone https://github.com/emacs-mirror/emacs.git
+          cd emacs
+          ./autogen.sh
+          ./configure
+          make -j4
+          sudo make install
+          git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+      fi
