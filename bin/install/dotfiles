@@ -8,6 +8,7 @@ source "$(dirname $(realpath $0))/../../lib/common"
 
 install() {
 	(
+    ensure_installed "jq"
 		cd "$HOME"
 		rm -rf "$HOME/dotfiles-manager"
 		git clone https://github.com/MainShayne233/dotfiles-manager

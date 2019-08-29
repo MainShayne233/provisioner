@@ -7,6 +7,8 @@ shopt -s extdebug
 export LOCAL_BIN="/usr/local/bin"
 export OPT_DIR="$HOME/opt/"
 
+SCRIPT_PATH="$(dirname $(realpath $0))"
+
 init() {
 	mkdir -p "$OPT_DIR"
 }
@@ -18,6 +20,18 @@ which_validate() {
 	else
 		exit 1
 	fi
+}
+
+ensure_installed() {
+  local name="$1"
+  local not_installed
+  set +e
+  bash  "$SCRIPT_PATH/$name" "validate"
+  not_installed="$?"
+  set -e
+  if [ "$not_installed" -eq "1" ]; then
+    bash  "$SCRIPT_PATH/$name" "install"
+  fi
 }
 
 wget_dpkg() {
