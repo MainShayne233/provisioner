@@ -4,6 +4,7 @@ set -CEeuo pipefail
 IFS=$'\n\t'
 shopt -s extdebug
 
+export LOCAL_BIN="/usr/local/bin"
 export OPT_DIR="$HOME/opt/"
 
 init() {
@@ -17,6 +18,14 @@ which_validate() {
 	else
 		exit 1
 	fi
+}
+
+wget_dpkg() {
+  echo 'hi'
+	local download_url="$1"
+	local file="$1"
+	wget -P /tmp "$download_url"
+	sudo dpkg -i "/tmp/$file"
 }
 
 init
