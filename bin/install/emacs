@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+install() {
+  mkdir "$HOME/opt"
+  cd "$HOME/opt"
+  sudo apt-get install build-essential
+  sudo apt-get build-dep emacs
+  git clone https://github.com/emacs-mirror/emacs.git
+  cd emacs
+  ./autogen.sh
+  ./configure
+  make -j4
+  sudo make install
+  git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+}
+
+validate() {
+  if which emacs > /dev/null 2>&1; then
+    exit 0
+  else
+    exit 1
+  fi
+}
+
+"$@"
