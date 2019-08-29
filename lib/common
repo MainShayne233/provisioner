@@ -21,11 +21,33 @@ which_validate() {
 }
 
 wget_dpkg() {
-  echo 'hi'
+	echo 'hi'
 	local download_url="$1"
 	local file="$1"
 	wget -P /tmp "$download_url"
 	sudo dpkg -i "/tmp/$file"
+}
+
+apt_package() {
+	local action="$1"
+	local package_name="$2"
+	local command_name="${3:-$2}"
+
+	case "$action" in
+
+	"validate")
+		which_validate "$command_name"
+		;;
+
+	"install")
+		sudo apt install "$package_name"
+		;;
+
+	*)
+		echo "Bad action used for apt_package: $action"
+		exit 1
+		;;
+	esac
 }
 
 init
