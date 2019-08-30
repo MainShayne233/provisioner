@@ -35,9 +35,8 @@ ensure_installed() {
 }
 
 wget_dpkg() {
-	echo 'hi'
 	local download_url="$1"
-	local file="$1"
+	local file="$2"
 	wget -P /tmp "$download_url"
 	sudo dpkg -i "/tmp/$file"
 }
