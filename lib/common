@@ -6,6 +6,7 @@ shopt -s extdebug
 
 export LOCAL_BIN="/usr/local/bin"
 export OPT_DIR="$HOME/opt/"
+export BASHRC="${BASHRC:-$HOME/.bashrc}"
 
 SCRIPT_PATH="$(dirname $(realpath $0))"
 
