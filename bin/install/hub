@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+set -CEeuo pipefail
+IFS=$'\n\t'
+shopt -s extdebug
+
+source "$(dirname $(realpath $0))/../../lib/common"
+
+GOPATH="${GOPATH:-$HOME/.go}"
+PATH="$GOPATH/src/github.com/github"
+
+install() {
+  (
+    mkdir -p "$PATH"
+    git clone \
+      --config transfer.fsckobjects=false \
+      --config receive.fsckobjects=false \
+      --config fetch.fsckobjects=false \
+      https://github.com/github/hub.git "$PATH/hub"
+    cd "$PATH/hub"
+    make install prefix=/usr/local
+  )
+}
+
+validate() {
+  which_validate "hub"
+}
+
+"$@"

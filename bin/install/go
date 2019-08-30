@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -CEeuo pipefail
+IFS=$'\n\t'
+shopt -s extdebug
+
+source "$(dirname $(realpath $0))/../../lib/common"
+
+install() {
+  sudo add-apt-repository ppa:gophers/archive
+  sudo apt-get update
+  sudo apt-get install golang-1.11-go
+}
+
+validate() {
+  which_validate "go"
+}
+
+"$@"
