@@ -8,6 +8,8 @@ export LOCAL_BIN="/usr/local/bin"
 export OPT_DIR="$HOME/opt/"
 export BASHRC="${BASHRC:-$HOME/.bashrc}"
 
+source "$BASHRC"
+
 SCRIPT_PATH="$(dirname $(realpath $0))"
 
 init() {
@@ -16,11 +18,12 @@ init() {
 
 which_validate() {
 	local name="$1"
-	if which "$name" >/dev/null 2>&1; then
-		exit 0
-	else
-		exit 1
-	fi
+
+  if ! type "$name" > /dev/null; then
+    exit 1
+  else
+    exit 0
+  fi
 }
 
 ensure_installed() {
