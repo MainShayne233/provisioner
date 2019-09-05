@@ -14,6 +14,7 @@ SCRIPT_PATH="$(dirname $(realpath $0))"
 
 init() {
 	mkdir -p "$OPT_DIR"
+  sudo apt install git curl wget
 }
 
 which_validate() {
