@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -CEeuo pipefail
+IFS=$'\n\t'
+shopt -s extdebug
+
+source "$(dirname $(realpath $0))/../../lib/common"
+
+install() {
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+}
+
+verify() {
+    which_validate "upgrade_oh_my_zsh"
+}
+
+"$@"
