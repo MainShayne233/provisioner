@@ -6,4 +6,12 @@ shopt -s extdebug
 
 source "$(dirname $(realpath $0))/../../lib/common"
 
-apt_package "$@" "git"
+install() {
+  apt_package "install" "git"
+  apt_package "install" "libgnome-keyring-dev"
+}
+
+verify() {
+  which_verify "git"
+}
+
