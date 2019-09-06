@@ -8,8 +8,6 @@ export LOCAL_BIN="/usr/local/bin"
 export OPT_DIR="$HOME/opt/"
 export BASHRC="${BASHRC:-$HOME/.bashrc}"
 
-source "$BASHRC"
-
 SCRIPT_PATH="$(dirname $(realpath $0))"
 
 init() {

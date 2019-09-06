@@ -6,4 +6,14 @@ shopt -s extdebug
 
 source "$(dirname $(realpath $0))/../../lib/common"
 
-apt_package "$@" "tmux"
+install() {
+  apt_package "install" "tmux"
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+}
+
+verify() {
+  which_verify "tmux"
+}
+
+"$@"
+
